@@ -46,6 +46,18 @@ $router->post('/api/checks/{check}/enable', function (\Illuminate\Http\Request $
         ])->getBody());
     }
 });
+$router->post('/api/sites', function (\Illuminate\Http\Request $request) {
+    if ($request->hasHeader('Authorization')) {
+        $guzzle = new \GuzzleHttp\Client();
+
+        return response((string)$guzzle->post('https://ohdearapp.com/api/sites', [
+            'headers' => [
+                'Authorization' => $request->header('Authorization'),
+            ],
+            'body' => $request->getContent(),
+        ])->getBody());
+    }
+});
 $router->post('/api/checks/{check}/disable', function (\Illuminate\Http\Request $request, $check) {
     if ($request->hasHeader('Authorization')) {
         $guzzle = new \GuzzleHttp\Client();
