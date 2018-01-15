@@ -15,15 +15,14 @@ $router->get('/', function () {
 });
 $router->get('/api/me', function (\Illuminate\Http\Request $request) {
     if ($request->hasHeader('Authorization')) {
-        dd(str_replace('Bearer ', '', $request->get('Authorization')));
-        $ohDearSDK = new \OhDear\PhpSdk\OhDear();
+        $ohDearSDK = new \OhDear\PhpSdk\OhDear(str_replace('Bearer ', '', $request->header('Authorization')));
 
         return response()->json($ohDearSDK->me());
     }
 });
 $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
     if ($request->hasHeader('Authorization')) {
-        $ohDearSDK = new \OhDear\PhpSdk\OhDear(str_replace('Bearer ', '', $request->get('Authorization')));
+        $ohDearSDK = new \OhDear\PhpSdk\OhDear(str_replace('Bearer ', '', $request->header('Authorization')));
 
         return response()->json($ohDearSDK->sites());
     }
