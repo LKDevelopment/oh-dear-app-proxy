@@ -15,15 +15,23 @@ $router->get('/', function () {
 });
 $router->get('/api/me', function (\Illuminate\Http\Request $request) {
     if ($request->hasHeader('Authorization')) {
-        $ohDearSDK = new \OhDear\PhpSdk\OhDear(str_replace('Bearer ', '', $request->header('Authorization')));
+        $guzzle = new \GuzzleHttp\Client();
 
-        return response()->json($ohDearSDK->me());
+        return response((string)$guzzle->get('https://ohdearapp.com/api/me', [
+            'headers' => [
+                'Authorization' =>$request->header('Authorization')
+            ],
+        ]));
     }
 });
 $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
     if ($request->hasHeader('Authorization')) {
-        $ohDearSDK = new \OhDear\PhpSdk\OhDear(str_replace('Bearer ', '', $request->header('Authorization')));
+        $guzzle = new \GuzzleHttp\Client();
 
-        return response()->json(['data' => $ohDearSDK->sites()]);
+        return response((string)$guzzle->get('https://ohdearapp.com/api/sites', [
+            'headers' => [
+                'Authorization' =>$request->header('Authorization')
+            ],
+        ]));
     }
 });
