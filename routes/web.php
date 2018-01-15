@@ -54,7 +54,7 @@ $router->post('/api/sites', function (\Illuminate\Http\Request $request) {
             'headers' => [
                 'Authorization' => $request->header('Authorization'),
             ],
-            'body' => (string) $request->getContent(),
+            'body' => json_encode(['team_id' => $request->get('team_id'), 'url' => $request->get('url')]),
         ])->getBody());
     }
 });
