@@ -11,7 +11,7 @@
 |
 */
 $router->get('/', function () {
-    return response();
+    return response()->json(['response' => 'ok']);
 });
 $router->get('/api/me', function (\Illuminate\Http\Request $request) {
     if ($request->hasHeader('Authorization')) {
