@@ -54,7 +54,7 @@ $router->post('/api/sites', function (\Illuminate\Http\Request $request) {
             'headers' => [
                 'Authorization' => $request->header('Authorization'),
             ],
-            'body' => $request->getContent(),
+            'body' => (string) $request->getContent(),
         ])->getBody());
     }
 });
