@@ -35,7 +35,7 @@ $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
         ])->getBody());
     }
 });
-$router->get('/api/checks/{check}/enable', function (\Illuminate\Http\Request $request, $check) {
+$router->post('/api/checks/{check}/enable', function (\Illuminate\Http\Request $request, $check) {
     if ($request->hasHeader('Authorization')) {
         $guzzle = new \GuzzleHttp\Client();
 
@@ -46,7 +46,7 @@ $router->get('/api/checks/{check}/enable', function (\Illuminate\Http\Request $r
         ])->getBody());
     }
 });
-$router->get('/api/checks/{check}/disable', function (\Illuminate\Http\Request $request, $check) {
+$router->post('/api/checks/{check}/disable', function (\Illuminate\Http\Request $request, $check) {
     if ($request->hasHeader('Authorization')) {
         $guzzle = new \GuzzleHttp\Client();
 
