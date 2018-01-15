@@ -19,7 +19,7 @@ $router->get('/api/me', function (\Illuminate\Http\Request $request) {
 
         return response((string)$guzzle->get('https://ohdearapp.com/api/me', [
             'headers' => [
-                'Authorization' =>$request->header('Authorization')
+                'Authorization' => $request->header('Authorization'),
             ],
         ])->getBody());
     }
@@ -30,7 +30,29 @@ $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
 
         return response((string)$guzzle->get('https://ohdearapp.com/api/sites', [
             'headers' => [
-                'Authorization' =>$request->header('Authorization')
+                'Authorization' => $request->header('Authorization'),
+            ],
+        ])->getBody());
+    }
+});
+$router->get('/api/checks/{check}/enable', function (\Illuminate\Http\Request $request, $check) {
+    if ($request->hasHeader('Authorization')) {
+        $guzzle = new \GuzzleHttp\Client();
+
+        return response((string)$guzzle->post('https://ohdearapp.com/api/checks/' . $check . '/enable', [
+            'headers' => [
+                'Authorization' => $request->header('Authorization'),
+            ],
+        ])->getBody());
+    }
+});
+$router->get('/api/checks/{check}/disable', function (\Illuminate\Http\Request $request, $check) {
+    if ($request->hasHeader('Authorization')) {
+        $guzzle = new \GuzzleHttp\Client();
+
+        return response((string)$guzzle->post('https://ohdearapp.com/api/checks/' . $check . '/disable', [
+            'headers' => [
+                'Authorization' => $request->header('Authorization'),
             ],
         ])->getBody());
     }
