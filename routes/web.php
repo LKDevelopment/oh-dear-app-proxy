@@ -21,7 +21,7 @@ $router->get('/api/me', function (\Illuminate\Http\Request $request) {
             'headers' => [
                 'Authorization' =>$request->header('Authorization')
             ],
-        ]));
+        ])->getBody());
     }
 });
 $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
@@ -32,6 +32,6 @@ $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
             'headers' => [
                 'Authorization' =>$request->header('Authorization')
             ],
-        ]));
+        ])->getBody());
     }
 });
