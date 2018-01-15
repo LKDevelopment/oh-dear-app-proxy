@@ -24,6 +24,6 @@ $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
     if ($request->hasHeader('Authorization')) {
         $ohDearSDK = new \OhDear\PhpSdk\OhDear(str_replace('Bearer ', '', $request->header('Authorization')));
 
-        return response()->json($ohDearSDK->sites());
+        return response()->json(['data' => $ohDearSDK->sites()]);
     }
 });
