@@ -35,17 +35,6 @@ $router->get('/api/sites', function (\Illuminate\Http\Request $request) {
         ])->getBody());
     }
 });
-$router->post('/api/checks/{check}/enable', function (\Illuminate\Http\Request $request, $check) {
-    if ($request->hasHeader('Authorization')) {
-        $guzzle = new \GuzzleHttp\Client();
-
-        return response((string)$guzzle->post('https://ohdearapp.com/api/checks/' . $check . '/enable', [
-            'headers' => [
-                'Authorization' => $request->header('Authorization'),
-            ],
-        ])->getBody());
-    }
-});
 $router->post('/api/sites', function (\Illuminate\Http\Request $request) {
     if ($request->hasHeader('Authorization')) {
         $guzzle = new \GuzzleHttp\Client();
@@ -55,6 +44,29 @@ $router->post('/api/sites', function (\Illuminate\Http\Request $request) {
                 'Authorization' => $request->header('Authorization'),
             ],
             'json' => ['team_id' => $request->get('team_id'), 'url' => $request->get('url')],
+        ])->getBody());
+    }
+});
+$router->delete('/api/sites/{site}', function (\Illuminate\Http\Request $request, $site) {
+    if ($request->hasHeader('Authorization')) {
+        $guzzle = new \GuzzleHttp\Client();
+
+        return response((string)$guzzle->delete('https://ohdearapp.com/api/sites/' . $site, [
+            'headers' => [
+                'Authorization' => $request->header('Authorization'),
+            ],
+            'json' => ['team_id' => $request->get('team_id'), 'url' => $request->get('url')],
+        ])->getBody());
+    }
+});
+$router->post('/api/checks/{check}/enable', function (\Illuminate\Http\Request $request, $check) {
+    if ($request->hasHeader('Authorization')) {
+        $guzzle = new \GuzzleHttp\Client();
+
+        return response((string)$guzzle->post('https://ohdearapp.com/api/checks/' . $check . '/enable', [
+            'headers' => [
+                'Authorization' => $request->header('Authorization'),
+            ],
         ])->getBody());
     }
 });
